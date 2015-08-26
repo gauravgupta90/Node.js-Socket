@@ -1,4 +1,5 @@
-var User = require('../model/user').User;
+var User = require('../model/user').User,
+    Boom = require('boom');
 
 
 exports.getAll = function (req,res,next) {
