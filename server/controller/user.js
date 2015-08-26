@@ -1,6 +1,4 @@
-var Joi = require('joi'),
-    Boom = require('boom'),
-    User = require('../model/user').User;
+var User = require('../model/user').User;
 
 
 exports.getAll = function (req,res,next) {
@@ -11,7 +9,7 @@ exports.getAll = function (req,res,next) {
             res.send(Boom.badImplementation(err)); // 500 error
         }
     });
-  
+
 };
 
 exports.getOne = function (req,res,next) {
@@ -22,7 +20,7 @@ exports.getOne = function (req,res,next) {
             res.send(Boom.badImplementation(err)); // 500 error
         }
     });
-  
+
 };
 
 exports.create = function (req,res,next) {
@@ -74,6 +72,5 @@ exports.remove = function (req,res,next) {
             console.log(err);
             res.send(Boom.badRequest("Could not delete user"));
         }
-    });  
+    });
 };
-

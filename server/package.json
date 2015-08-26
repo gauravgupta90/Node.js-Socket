@@ -1,6 +1,6 @@
 {
-  "name": "jwt-auth-poc",
-  "description": "Hapijs JWT POC",
+  "name": "rating-system",
+  "description": "Rating System",
   "version": "0.1.0",
   "main": "server",
   "engines": {
@@ -8,9 +8,7 @@
   },
   "dependencies": {
     "body-parser": "^1.10.0",
-    "boom": "^2.6.1",
     "express": "^4.10.6",
-    "joi": "4.x.x",
-    "mongoose": "^3.8.20"
+    "mongoose": "3.8.x"
   }
 }
