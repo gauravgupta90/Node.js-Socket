@@ -25,7 +25,6 @@ exports.getOne = function (req,res,next) {
 };
 
 exports.create = function (req,res,next) {
-  console.log(req.body);
     var user = new User(req.body);
 
     user.save(function(err, user) {
@@ -70,7 +69,6 @@ exports.remove = function (req,res,next) {
             // Couldn't find the object.
             res.send(Boom.notFound());
         } else {
-            console.log(err);
             res.send(Boom.badRequest("Could not delete user"));
         }
     });
