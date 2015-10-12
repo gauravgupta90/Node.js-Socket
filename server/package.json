@@ -11,5 +11,11 @@
     "boom": "^2.6.1",
     "express": "^4.10.6",
     "mongoose": "3.8.x"
+  },
+  "author": {
+    "name": "gaurav gupta",
+    "email": "gaurav_bng@hotmail.com",
+    "github": "https://github.com/gauravgupta90",
+    "linkedin": "https://in.linkedin.com/pub/gaurav-gupta/83/837/657"
   }
 }
