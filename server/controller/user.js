@@ -3,18 +3,18 @@ var User = require('../model/user').User,
 
 
 exports.getAll = function (req,res,next) {
-      User.find({}, function(err, user) {
-        if (!err) {
-            res.json(user);
-        } else {
-            res.send(Boom.badImplementation(err)); // 500 error
-        }
+    User.getAllUsers(function(err, user) {
+      if (!err) {
+          res.json(user);
+      } else {
+          res.send(Boom.badImplementation(err)); // 500 error
+      }
     });
 
 };
 
 exports.getOne = function (req,res,next) {
-      User.findOne({ 'userId': req.params.userid }, function(err, user) {
+      User.getUser(req.params.userid , function(err, user) {
         if (!err) {
             res.json(user);
         } else {
@@ -25,9 +25,7 @@ exports.getOne = function (req,res,next) {
 };
 
 exports.create = function (req,res,next) {
-    var user = new User(req.body);
-
-    user.save(function(err, user) {
+    User.createUser(req.body, function(err, user) {
         if (!err) {
             res.json(user);
         } else {
@@ -40,36 +38,27 @@ exports.create = function (req,res,next) {
 };
 
 exports.update = function (req,res,next) {
-    User.findOne({ 'userId': req.params.userid }, function(err, user) {
-        if (!err) {
-            user.username = req.body.username;
-             user.save(function(err, user) {
-                  if (!err) {
-                      res.json(user);
-                  } else {
-                       if (11000 === err.code || 11001 === err.code) {
-                              res.send(Boom.forbidden("please provide another user id, it already exist"));
-                      }
-                      else res.send(Boom.forbidden(err)); // HTTP 403
-                  }
-              });
-
-        } else {
-            res.send(Boom.badImplementation(err)); // 500 error
-        }
+    User.updateUser(req.params.userid, req.body.username, function(err, user){
+      if (!err) {
+          res.json(user);
+      } else {
+           if (11000 === err.code || 11001 === err.code) {
+                  res.send(Boom.forbidden("please provide another user id, it already exist"));
+          }
+          else res.send(Boom.forbidden(err)); // HTTP 403
+      }
     });
 };
 
 exports.remove = function (req,res,next) {
-    User.findOne({ 'userId': req.params.userid }, function(err, user) {
-        if (!err && user) {
-            user.remove();
-            res.send("User deleted successfully");
-        } else if (!err) {
-            // Couldn't find the object.
-            res.send(Boom.notFound());
+    User.removeUser(req.params.userid, function(err, user){
+        if(!err){
+          if(user)
+              res.send("User deleted successfully");
+          else
+              res.send("No user found");
         } else {
-            res.send(Boom.badRequest("Could not delete user"));
+          res.send(Boom.badRequest("Could not delete user")); 
         }
     });
 };

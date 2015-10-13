@@ -22,6 +22,26 @@ var UserSchema = new Schema({
   
 });
 
+UserSchema.statics.getAllUsers= function(callback) {
+    this.find({}, callback);
+};
+
+UserSchema.statics.getUser= function(userId, callback) {
+    this.find({'userId': userId}, callback);
+};
+
+UserSchema.statics.createUser = function(requestData, callback) {
+    this.create(requestData, callback);
+};
+
+UserSchema.statics.updateUser = function(userId, username, callback) {
+    this.findOneAndUpdate({'userId': userId}, { $set: { 'username': username }}, callback);
+};
+
+UserSchema.statics.removeUser = function(userId, callback) {
+    this.remove({'userId': userId}, callback);
+};
+
 var user = mongoose.model('user', UserSchema);
 
 /** export schema */
