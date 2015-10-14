@@ -48,7 +48,7 @@ You can change the settings in server/config/config.js file
 			"userId":"gauravgupta90",
 			"username":"gauravgupta",
 			"firstname":"Gaurav",
-			"lastname":"Gupta"	// optional
+			"fullname":"Gaurav Gupta" // due to virtual function; this field will split by space and will store as firstname and lastname
 		}
 
 	Response:
