@@ -1,3 +1,5 @@
+'use strict';
+
 // Load modules
 
 var User      = require('./controller/user'),
