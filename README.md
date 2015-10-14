@@ -1,7 +1,15 @@
-Express-Mongoose-Angular Scafolded Demo Project
+Express-Mongoose-Angular Skeleton
 ================================================
 
-The purpose of this app is to show a new way to work with Express.js, Mongodb, Mongoose, Angular.js.
+The purpose of this app is to prepare a basic Skeleton for a node.js project and show a new way to work with Express.js, Mongodb, Mongoose, Angular.js.
+
+This gives a quick start for a node.js industrial project without worrying much on structure but focus more on business logic.
+
+It has only basic modules to start a new project from scratch and later add few advance module when needed.
+
+Now it's time to start coding...
+
+Happy Coding!
 
 
 ### Install an app
