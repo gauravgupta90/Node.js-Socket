@@ -40,7 +40,7 @@ exports.create = function (req,res,next) {
 exports.update = function (req,res,next) {
     User.updateUser(req.params.userid, req.body.username, function(err, user){
       if (!err) {
-          res.json(user);
+          res.send("User updated successfully");
       } else {
            if (11000 === err.code || 11001 === err.code) {
                   res.send(Boom.forbidden("please provide another user id, it already exist"));
