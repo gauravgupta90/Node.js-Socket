@@ -1,13 +1,33 @@
 <!DOCTYPE html>
 <html lang="en" data-ng-app="app">
 <head>
-  <meta charset="utf-8" />
-  <title>Hapi-Mongoose-Angular</title>
-  <meta name="description" content="app, web app, responsive, responsive layout, admin, admin panel, admin dashboard, flat, flat ui, ui kit, AngularJS, ui route, charts, widgets, components" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  
+  	<meta charset="utf-8" />
+  	<title>Express-Socket</title>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.7/socket.io.min.js"></script>  
+	<script>  
+	    var socket = io.connect('http://localhost:8000');
+		socket.on('connect', function(data) {
+		    socket.emit('join', 'Users are live.');
+		});
+
+		socket.on('broad', function(data) {
+		         $('#future').html(data);
+		});
+
+		function myFunction(){
+			var message = document.getElementById("chat_input").value;
+			socket.emit('messages', message);
+		}
+	</script>
+
 </head>
 <body>
-  Welcome!
+    <h1>Socket Example</h1>
+    <div id="future"></div>
+   	<form id="form" id="chat_form">
+        <input id="chat_input" type="text">
+        <input type="button" onclick="myFunction()" value="Submit">
+    </form>  
+
 </body>
 </html>
