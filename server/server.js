@@ -23,9 +23,8 @@ io.on('connection', function(client) {
     });
 
     client.on('messages', function(data) {
-    		console.log(data);
-           	client.emit('broad', data);
-           	client.broadcast.emit('broad',data);
+          client.emit('broad', data);
+          client.broadcast.emit('broad',data);
     });
 
     client.on('disconnect', function () {

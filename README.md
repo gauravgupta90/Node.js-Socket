@@ -48,6 +48,12 @@ You can see the port number in command prompt after sucessfull run
 
 			1 users are live
 
+###### *Broadcast and emmit*
+
+	Open several tab in same browser or other and can see submitted message is broadcasted to all the tab
+
+	Whatever message you submit on any one of the window or tab same message is broadcasted/visible to all the tabs.
+
 
 
 		
