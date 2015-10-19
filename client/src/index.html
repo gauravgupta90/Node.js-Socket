@@ -3,40 +3,87 @@
 <head>
   	<meta charset="utf-8" />
   	<title>Express-Socket</title>
-  	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.7/socket.io.min.js"></script>  
 	<script>  
-	    var socket = io.connect('http://localhost:8000');
+	   var socket = io.connect('http://localhost:8000');
 		socket.on('connect', function(data) {
 		    socket.emit('join', 'Users are live.');
 		});
 
 		socket.on('broad', function(data) {
-				console.log(data);
-		         $('#broadcast').html(data);
+          document.getElementById("broadcast").innerHTML = data;
 		});
+
+    socket.on('brod_chat_content', function(user_name, msg){
+          var div = document.getElementById('chat_messages');
+          div.innerHTML = div.innerHTML + '<li>'+user_name+" : "+msg+'</li>';
+    });
 
 		function myFunction(){
 			var message = document.getElementById("chat_input").value;
 			socket.emit('messages', message);
 		}
+
+    // chat application code starts here
+
+    function sendChatMessage(){
+      var chat_content = document.getElementById("chat_content").value;
+      var user_name = document.getElementById("user_name").value;
+      if(!user_name) alert("missing user name");
+      else {
+        if(!chat_content) alert("message content can't be empty");
+        else  socket.emit('chat_content', user_name, chat_content);
+      }
+    }
+    
+    function disableUserButton(){
+        document.getElementById("user_name").setAttribute("disabled", "disabled");
+        document.getElementById("setUserButton").style.display = 'none';
+        document.getElementById("user_name_message").innerHTML = 'User Name : ';
+    };
+
+
 	</script>
+  <style>
+      .ulClass { list-style-type: none; margin: 0; padding: 0; }
+      .ulClass li { padding: 5px 10px; }
+      .ulClass li:nth-child(odd) { background: #eee; }
+      .margin{
+        margin-bottom: 1cm;
+        margin-top: 1cm;
+      }
+  </style>
 
 </head>
 <body>
+  <div class="margin">
     <h1>Socket Example</h1>
     <h3>Open several tab in same browser or other and can see submitted message is broadcasted to all the tab</h3>
-    <div >Broadcasted Message: <span id="broadcast"></span></div>
+    <div >Broadcasted Message: <b><span id="broadcast"></span></b></div>
     <br>
    	<form id="form" id="chat_form">
-        <input id="chat_input" type="text" placeholder="type message here to broadcasted..">
+        <input id="chat_input" type="text" autocomplete="off" placeholder="type message here to broadcasted..">
         <input type="button" onclick="myFunction()" value="Broadcast">
     </form>
-    <br>
-    <br>
-    <hr/>
+  </div>
 
+  <hr/>
+
+  <div class="margin">
+    <h1>Chat Application Example</h1>
+    <b><span id="user_name_message">Please provide user name: </span></b>
+
+    <input type="text" id="user_name" value="" />
+
+    <input type="button" value="Save" onclick="disableUserButton()" id="setUserButton">
+
+    <ul id="chat_messages" class="ulClass"></ul>
+    <br>
+    <p>Start chatting...</p>
+    <input id="chat_content" type="text" autocomplete="off" /><input type="button" onclick="sendChatMessage()" value="Send">
+    
+  </div>
     <div><a href="https://github.com/gauravgupta90">Visit Github Repository</a></div>
 
 </body>
-</html>
+</html> 
